@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import authService from "./auth.service";
 
 function Todos() {
-
   const [todos, setTodos] = useState([]);
   const navigate = useNavigate();
 
@@ -14,7 +13,7 @@ function Todos() {
 
   const fetchTodos = async () => {
     const res = await axios.post(
-      "https://api.dotenx.com/database/query/select/project/noelOND7MdGyoUDU/table/items",
+      "<paste 'Get records' endpoint here >",
       {
         columns: [],
       },
@@ -28,13 +27,12 @@ function Todos() {
     setTodos(res.data);
   };
 
-
   return (
-    <div>
+    <div className="container mx-auto ">
       <div>
         <h1 className="text-3xl mb-8">Todos</h1>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-6"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-6 float-right"
           onClick={() => {
             authService().logout();
             navigate("/login");
@@ -42,7 +40,6 @@ function Todos() {
         >
           Logout
         </button>
-
       </div>
 
       <Modal fetch={fetchTodos} />
@@ -59,7 +56,7 @@ function Todos() {
           </tr>
         </thead>
         <tbody>
-          {todos.map((todo) => (
+          {todos?.map((todo) => (
             <tr key={todo.id}>
               <td className="border px-4 py-2">{todo.title}</td>
               <td className="border px-4 py-2">{todo.start}</td>
@@ -68,12 +65,12 @@ function Todos() {
               <td className="border px-4 py-2">
                 {todo.is_done ? "Yes" : "No"}
               </td>
-              <td className="border px-4 py-2">
+              <td className="border px-4 py-2 flex justify-center items-center">
                 <button
-                  className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-6"
+                  className="bg-green-500 hover:opacity-75 text-white font-bold py-2 px-4 rounded-l "
                   onClick={async () => {
                     await axios.post(
-                      `https://api.dotenx.com/database/query/update/project/noelOND7MdGyoUDU/table/items/row/${todo.id}`,
+                      `<paste 'Update a record by id' endpoint here >${todo.id}`,
                       {
                         is_done: "true",
                       },
@@ -90,10 +87,10 @@ function Todos() {
                   Done
                 </button>
                 <button
-                  className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-6"
+                  className="bg-red-500 hover:opacity-75 text-white font-bold py-2 px-4 rounded-r"
                   onClick={async () => {
                     await axios.post(
-                      `https://api.dotenx.com/database/query/delete/project/noelOND7MdGyoUDU/table/items/row/${todo.id}`,
+                      `<paste 'Delete a record by id' endpoint here >${todo.id}`,
                       {},
                       {
                         headers: {
@@ -132,16 +129,12 @@ function Modal({ fetch }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(
-        "https://api.dotenx.com/database/query/insert/project/noelOND7MdGyoUDU/table/items",
-        form,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authService().getToken()}`,
-          },
-        }
-      );
+      await axios.post("<paste 'Add a record' endpoint here >", form, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authService().getToken()}`,
+        },
+      });
       fetch();
       alert("Successfully added todo");
       setShowModal(false);
@@ -243,16 +236,16 @@ function Modal({ fetch }) {
                     </div>
                     <div class="flex items-center justify-between">
                       <button
-                        className="bg-red-600 text-white active:bg-red-500 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                        type="submit"
-                      >
-                        Add
-                      </button>
-                      <button
                         className="bg-gray-200 text-gray-900 active:bg-gray-400 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         onClick={() => setShowModal(false)}
                       >
                         Cancel
+                      </button>
+                      <button
+                        className="bg-red-600 text-white active:bg-red-500 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="submit"
+                      >
+                        Add
                       </button>
                     </div>
                   </form>

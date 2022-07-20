@@ -1,17 +1,13 @@
 import axios from "axios";
 
 function authService() {
-
   const register = async (fullname, email, password) => {
     try {
-      await axios.post(
-        "https://api.dotenx.com/user/management/project/noelOND7MdGyoUDU/register",
-        {
-          fullname,
-          email,
-          password,
-        }
-      );
+      await axios.post("<paste 'Sign up a user' endpoint here >", {
+        fullname,
+        email,
+        password,
+      });
     } catch (error) {
       throw new Error(`Failed to sign up: ${error.message}`);
     }
@@ -19,13 +15,10 @@ function authService() {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post(
-        "https://api.dotenx.com/user/management/project/noelOND7MdGyoUDU/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post("<paste 'Sign in' endpoint here >", {
+        email,
+        password,
+      });
 
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("expirationTime", response.data.expirationTime);

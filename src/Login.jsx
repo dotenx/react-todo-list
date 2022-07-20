@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import authService from "./auth.service";
 
-
-
 function Login() {
   const navigate = useNavigate();
 
@@ -30,9 +28,6 @@ function Login() {
         <form onSubmit={handleSubmit}>
           <div class="mt-4">
             <div>
-              <label class="block" for="email">
-                Email
-              </label>
               <input
                 type="text"
                 placeholder="Email"
@@ -42,7 +37,6 @@ function Login() {
               ></input>
             </div>
             <div class="mt-4">
-              <label class="block">Password</label>
               <input
                 type="password"
                 placeholder="Password"
@@ -51,7 +45,7 @@ function Login() {
                 className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
               ></input>
             </div>
-            <div class="flex items-baseline justify-between">
+            <div class="flex items-baseline justify-end">
               <button class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">
                 Login
               </button>
